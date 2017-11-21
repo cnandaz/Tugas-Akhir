@@ -66,8 +66,6 @@ public class pembeliController implements Initializable {
     @FXML
     private TableView<BarangDetail> tabeldaftar;
     @FXML
-    private TableView<BarangDetail> tabelUser;
-    @FXML
     private TableColumn<BarangDetail, String> kode_barangID;
     @FXML
     private TableColumn<BarangDetail, String> nama_barangID;
@@ -137,11 +135,14 @@ public class pembeliController implements Initializable {
         }
         }
     private void tabeldaftarMouseClicked(java.awt.event.MouseEvent evt){
-    txtkode.setText(tabeldaftar.getValueAt(tabeldaftar.getSelectedRow(), 0).toString());
-    txtnama.setText(tabeldaftar.getValueAt(tabeldaftar.getSelectedRow(), 1).toString());
-    cbkategori.setText(tabeldaftar.getValueAt(tabeldaftar.getSelectedRow(), 2).toString());
-    cbjenis.setText(tabeldaftar.getValueAt(tabeldaftar.getSelectedRow(), 3).toString());
-    txtharga.setText(tabeldaftar.getValueAt(tabeldaftar.getSelectedRow(), 4).toString());
+    int baris = tabeldaftar.getSelectedRow();
+        if(baris != -1){
+            txtkode.setText(tabeldaftar.getValueAt(baris, 0).toString());
+            txtnama.setText(tabeldaftar.getValueAt(baris, 1).toString());
+            cbkategori.setText(tabeldaftar.getValueAt(baris, 2).toString());
+            cbjenis.setText(tabeldaftar.getValueAt(baris, 3).toString());
+            txtharga.setText(tabeldaftar.getValueAt(baris, 4).toString());
+        }
     }
     @FXML
     void batal(ActionEvent event) {

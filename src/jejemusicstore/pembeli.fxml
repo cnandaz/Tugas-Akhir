@@ -88,7 +88,7 @@
             <TableColumn fx:id="hargaID" prefWidth="79.0" text="Harga" />
         </columns>
       </TableView>
-      <Label layoutX="398.0" layoutY="496.0" text="* Harap pesan barang sesuai yang ada di daftar barang" textFill="WHITE" />
+      <Label layoutX="398.0" layoutY="496.0" text="* Pesanan akan segera dikirim jika pembayaran sudah dilakukan" textFill="WHITE" />
       <Button fx:id="keluar" layoutX="848.0" layoutY="492.0" mnemonicParsing="false" onAction="#keluar" text=" Keluar " />
       <Button fx:id="load" layoutX="763.0" layoutY="492.0" mnemonicParsing="false" onAction="#load" text="Load Daftar" />
     </children>
