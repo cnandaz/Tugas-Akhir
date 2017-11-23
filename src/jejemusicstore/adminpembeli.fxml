@@ -56,5 +56,6 @@
             <Font size="24.0" />
          </font>
       </Button>
+      <Button fx:id="id_keluar" layoutX="493.0" layoutY="297.0" mnemonicParsing="false" onAction="#klik_keluar" style="-fx-background-color: black; -fx-border-color: white; -fx-border-radius: 5px; -fx-background-radius: 5px;" text="Keluar" textFill="WHITE" />
    </children>
 </AnchorPane>

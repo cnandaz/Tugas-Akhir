@@ -205,7 +205,6 @@ public class home extends javax.swing.JFrame {
         jLabel3.setText("Jeje Music Store");
         jPanel2.add(jLabel3);
         jLabel3.setBounds(350, 10, 200, 40);
-        jLabel3.getAccessibleContext().setAccessibleName("Jeje Music Store");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -246,7 +245,7 @@ public class home extends javax.swing.JFrame {
         Btn_Hapus.setBounds(190, 370, 150, 30);
 
         Btn_Keluar.setBackground(new java.awt.Color(255, 255, 255));
-        Btn_Keluar.setText("K E L U A R");
+        Btn_Keluar.setText("L O G O U T");
         Btn_Keluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_KeluarActionPerformed(evt);
@@ -347,7 +346,9 @@ public class home extends javax.swing.JFrame {
     }//GEN-LAST:event_Btn_HapusActionPerformed
 
     private void Btn_KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_KeluarActionPerformed
-        dispose();
+        login admin = new login();
+        admin.setVisible(true);
+        dispose();    
     }//GEN-LAST:event_Btn_KeluarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -438,4 +439,5 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JTextField txtkode;
     private javax.swing.JTextField txtnama;
     // End of variables declaration//GEN-END:variables
+
 }

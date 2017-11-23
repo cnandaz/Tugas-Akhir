@@ -28,7 +28,9 @@ public class adminpembeliController implements Initializable {
     private Button id_admin;
     @FXML
     private Button id_pembeli;
-
+    @FXML
+    private Button id_keluar;
+    
     /**
      * Initializes the controller class.
      */
@@ -61,6 +63,9 @@ public class adminpembeliController implements Initializable {
                 System.out.println("Failed to create Window." + e);
     }
     }
-    
+    @FXML
+    void klik_keluar(ActionEvent event) {
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
     
 }

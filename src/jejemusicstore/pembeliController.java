@@ -7,6 +7,8 @@ package jejemusicstore;
 
 import com.jfoenix.controls.JFXTextField;
 import com.mysql.jdbc.Statement;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,8 +18,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -26,7 +30,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import jejemusicstore.c_koneksi;
+import jejemusicstore.controllerStore;
+import jejemusicstore.m_store;
 
 /**
  * FXML Controller class
@@ -45,8 +53,6 @@ public class pembeliController implements Initializable {
     private RadioButton COD;
     @FXML
     private JFXTextField nama;
-    @FXML
-    private JFXTextField pesanan;
     @FXML
     private JFXTextField alamat;
     @FXML
@@ -83,10 +89,10 @@ public class pembeliController implements Initializable {
     private TextField txtnama;
 
     @FXML
-    private TextField cbkategori;
+    private TextField txtkategori;
 
     @FXML
-    private TextField cbjenis;
+    private TextField txtjenis;
 
     @FXML
     private TextField txtharga;
@@ -105,15 +111,15 @@ public class pembeliController implements Initializable {
     
     @FXML
     private void proses(ActionEvent event) {
-        if(nama.getText().equals("") || pesanan.getText().equals("") || alamat.getText().equals("") || notelp.getText().equals("")  ){
+        if(nama.getText().equals("") || alamat.getText().equals("") || notelp.getText().equals("") || txtkode.getText().equals("") || txtnama.getText().equals("") || txtkategori.getText().equals("") || txtjenis.getText().equals("") || txtharga.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Harap Lengkapi Data Anda");
         }else{
         String ta11 = "";
         String Nama = nama.getText();
         String Kode = txtkode.getText();
         String Musik = txtnama.getText();
-        String Ktgr = cbkategori.getText();
-        String Jns = cbjenis.getText();
+        String Ktgr = txtkategori.getText();
+        String Jns = txtjenis.getText();
         String Harga = txtharga.getText();
         String Alamat = alamat.getText();
         int Notelp = Integer.parseInt(notelp.getText());
@@ -134,20 +140,16 @@ public class pembeliController implements Initializable {
         }
         }
         }
-    private void tabeldaftarMouseClicked(java.awt.event.MouseEvent evt){
-    int baris = tabeldaftar.getSelectedRow();
-        if(baris != -1){
-            txtkode.setText(tabeldaftar.getValueAt(baris, 0).toString());
-            txtnama.setText(tabeldaftar.getValueAt(baris, 1).toString());
-            cbkategori.setText(tabeldaftar.getValueAt(baris, 2).toString());
-            cbjenis.setText(tabeldaftar.getValueAt(baris, 3).toString());
-            txtharga.setText(tabeldaftar.getValueAt(baris, 4).toString());
-        }
-    }
+    
+
     @FXML
     void batal(ActionEvent event) {
         nama.setText("");
-        pesanan.setText("");
+        txtkode.setText("");
+        txtnama.setText("");
+        txtkategori.setText("");
+        txtjenis.setText("");
+        txtharga.setText("");
         alamat.setText("");
         notelp.setText("");
         BCA.setSelected(false);
@@ -184,9 +186,23 @@ public class pembeliController implements Initializable {
         tabeldaftar.setItems(null);
         tabeldaftar.setItems(data);
     }
+
     @FXML
     void keluar(ActionEvent event){
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        try{
+            //Hide this current window (if this is what you want)
+            ((Node)(event.getSource())).getScene().getWindow().hide();
+            //Load the new fxml
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("adminpembeli.fxml"));
+            Scene scene = new Scene (fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }
+            catch (IOException e){
+            System.out.println("Failed to create Window." + e);
+        }
     }
 }
     

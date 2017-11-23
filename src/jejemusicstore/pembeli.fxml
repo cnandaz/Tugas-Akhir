@@ -60,8 +60,8 @@
             <RadioButton fx:id="COD" mnemonicParsing="false" text="Cash On Delivery" textFill="WHITE" toggleGroup="$gender" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             <TextField fx:id="txtkode" editable="false" promptText="Kode Barang" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtnama" editable="false" promptText="Nama Barang" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="cbkategori" editable="false" promptText="Kategori" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="cbjenis" editable="false" promptText="Jenis Pengiriman" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txtkategori" editable="false" promptText="Kategori" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtjenis" editable="false" promptText="Jenis Pengiriman" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="txtharga" editable="false" promptText="Harga" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
@@ -89,7 +89,7 @@
         </columns>
       </TableView>
       <Label layoutX="398.0" layoutY="496.0" text="* Pesanan akan segera dikirim jika pembayaran sudah dilakukan" textFill="WHITE" />
-      <Button fx:id="keluar" layoutX="848.0" layoutY="492.0" mnemonicParsing="false" onAction="#keluar" text=" Keluar " />
-      <Button fx:id="load" layoutX="763.0" layoutY="492.0" mnemonicParsing="false" onAction="#load" text="Load Daftar" />
+      <Button fx:id="keluar" layoutX="844.0" layoutY="492.0" mnemonicParsing="false" onAction="#keluar" text=" Keluar " />
+      <Button fx:id="load" layoutX="759.0" layoutY="492.0" mnemonicParsing="false" onAction="#load" text="Load Daftar" />
     </children>
 </AnchorPane>
