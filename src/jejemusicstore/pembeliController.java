@@ -6,17 +6,20 @@
 package jejemusicstore;
 
 import com.jfoenix.controls.JFXTextField;
-import com.mysql.jdbc.Statement;
-import java.awt.event.MouseEvent;
+import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,6 +28,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TableView;
@@ -32,9 +36,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import jejemusicstore.c_koneksi;
-import jejemusicstore.controllerStore;
-import jejemusicstore.m_store;
+import jejemusicstore.DBKonek;
+import java.sql.Statement;
 
 /**
  * FXML Controller class
@@ -96,7 +99,11 @@ public class pembeliController implements Initializable {
 
     @FXML
     private TextField txtharga;
-
+    
+    Connection conn;
+    Statement stat;
+    ResultSet rs;
+    String sql;
 
     /**
      * Initializes the controller class.
@@ -105,10 +112,31 @@ public class pembeliController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        DBKonek DB = new DBKonek();
+        DB.connectdb();
+        conn = DB.conn;
+        stat = DB.pst; 
+        
+        tabeldaftar.setOnMousePressed(new EventHandler<MouseEvent>(){
+       
+        public void handle(MouseEvent event) {
+        String kodebarang = tabeldaftar.getSelectionModel().getSelectedItem().getKode_Barang();
+        String namabarang = tabeldaftar.getSelectionModel().getSelectedItem().getNama_Barang();
+        String kategori = tabeldaftar.getSelectionModel().getSelectedItem().getKategori();
+        String jenis = tabeldaftar.getSelectionModel().getSelectedItem().getJenis();
+        String harga = tabeldaftar.getSelectionModel().getSelectedItem().getHarga();
+        
+        txtkode.setText(kodebarang);
+        txtnama.setText(namabarang);
+        txtkategori.setText(kategori);
+        txtjenis.setText(jenis);
+        txtharga.setText(harga);
+        
+        }
+    });  
+    } 
     
-    
+            
     @FXML
     private void proses(ActionEvent event) {
         if(nama.getText().equals("") || alamat.getText().equals("") || notelp.getText().equals("") || txtkode.getText().equals("") || txtnama.getText().equals("") || txtkategori.getText().equals("") || txtjenis.getText().equals("") || txtharga.getText().equals("")){
@@ -141,7 +169,11 @@ public class pembeliController implements Initializable {
         }
         }
     
-
+                
+            
+          
+        
+                
     @FXML
     void batal(ActionEvent event) {
         nama.setText("");
@@ -159,17 +191,17 @@ public class pembeliController implements Initializable {
     }
     @FXML
     private void load(ActionEvent event) {
-        Connection con;
+        Connection conn;
         Statement stat;
 
         DBKonek DB = new DBKonek();
         DB.connectdb();
-        con = DB.conn;
+        conn = DB.conn;
         stat = (Statement) DB.pst;
         try{
             data = FXCollections.observableArrayList();
             
-            ResultSet rs = con.createStatement().executeQuery("SELECT * FROM barang");
+            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM barang");
             while (rs.next()){
                 data.add(new BarangDetail(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
             }
@@ -186,6 +218,8 @@ public class pembeliController implements Initializable {
         tabeldaftar.setItems(null);
         tabeldaftar.setItems(data);
     }
+    
+ 
 
     @FXML
     void keluar(ActionEvent event){
@@ -204,6 +238,8 @@ public class pembeliController implements Initializable {
             System.out.println("Failed to create Window." + e);
         }
     }
+
+    
 }
     
 
